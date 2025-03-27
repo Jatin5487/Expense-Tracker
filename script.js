@@ -250,7 +250,7 @@ taxForm.addEventListener("submit", (e) => {
 
   suggestionButton.addEventListener('click',(e)=>{
   
-      if (Number(remainingBalance) <= Number(totalIncome) * 0.3) {
+       if (Number(remainingBalance) <= Number(totalIncome) * 0.3) {
         suggestions[0].innerText = "You have spent 70% of your budget. Keep an eye on your expenses!";
         suggestions[1].innerText = "Try to set aside some savings now before it gets too late.";
     }
