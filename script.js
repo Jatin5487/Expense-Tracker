@@ -250,15 +250,7 @@ taxForm.addEventListener("submit", (e) => {
 
   suggestionButton.addEventListener('click',(e)=>{
   
-    let totalIncomeValue = Number(totalIncome);
-    let remainingBalanceValue = Number(remainingBalance);
-
-    if (isNaN(totalIncomeValue) || isNaN(remainingBalanceValue) || totalIncomeValue === 0) {
-        alert("Please enter valid income and expenses first.");
-        return; // Stop execution if values are not valid
-    }
-
-    if (Number(remainingBalance) <= Number(totalIncome) * 0.3) {
+      if (Number(remainingBalance) <= Number(totalIncome) * 0.3) {
         suggestions[0].innerText = "You have spent 70% of your budget. Keep an eye on your expenses!";
         suggestions[1].innerText = "Try to set aside some savings now before it gets too late.";
     }
