@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="output.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playwrite+IN:wght@100..400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="flex items-center bg-violet-400">
+<nav>
+  <ul >
+    <a href="#expansetracker"><li>Tracker</li></a>
+    <a href="#graph"><li>Graph</li></a>
+    <a href="#tax-calculator"><li>Tax Calculator</li></a>
+    <a href="#Artificial"><li>Get Suggestion/AI</li></a>
+  </ul>
+</nav>
+
+
+    <h1 class=" text-3xl" style="margin-bottom: 20px;" style="margin-top: -20px;" id="expansetracker">Track Your Expenses Here....</h1>
+
+    <div class="wrapper ml-3 w-[30%] p-4 border rounded-[10px]">
+      <h1 class="text-black text-3xl text-center" >Expense Tracker</h1>
+
+      <!-- income div-->
+      <div class="income-div">
+        <h2 class="text-2xl">Income</h2>
+        <form action="" id="income">
+          <label for="income">Enter Income:</label>
+          <input
+            type="number"
+            placeholder="Your Income...."
+            id="sallary"
+            class="border rounded-md m-2"
+            style="width: 100%"
+          />
+          <button
+            class="border px-1 rounded-sm mt-1 bg-gradient-to-r from-red-300 to-blue-300 text-gray-500 hover:from-transparent hover:to-transparent hover:border-gray-800 hover:text-gray-800 transition-all duration-75"
+          >
+            Add Income
+          </button>
+        </form>
+      </div>
+      <p class="content-income" id="income-data"></p>
+
+      <!-- div for expenses -->
+      <div class="expense-div">
+        <h2 class="text-2xl mt-3">Expenses</h2>
+        <form action="" id="expense">
+          <label for="description">Description:</label>
+          <input
+            type="text"
+            placeholder="eg. tour or grocerry"
+            class="border rounded-md m-2"
+            id="description"
+            style="width: 100%"
+          /><br />
+
+          <label for="expense">Enter Your Expenses here:</label>
+          <input
+            type="text"
+            placeholder="your expenses..."
+            id="expenses"
+            class="border rounded-md"
+            style="width: 100%"
+          />
+          <br />
+
+          <input
+            type="datetime-local"
+            class="mt-2"
+            id="datetime"
+            style="width: 100%"
+          /><br />
+
+          <button
+            class="border px-1 rounded-sm mt-2 bg-gray-600 text-white hover:bg-white hover:text-gray-800 transition-all duration-75;"
+          >
+            Add Expense</button
+          ><br />
+        </form>
+      </div>
+    </div>
+    <div class="content-expense" id="expense-data"></div>
+
+
+    <!-- div for chart graph -->
+     
+    <div class="graphwrapper " style="margin-top: 50px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0,  0,  0.2);" id="graph">
+      <h1 class="text-black">Graph</h1>
+      <div class="chart-controls flex gap-2 flex-wrap"  >
+        <button onclick="updateChart('bar')">Bar Chart</button>
+        <button onclick="updateChart('doughnut')">Doughnut Chart</button>
+        <button onclick="updateChart('pie')">Pie Chart</button>
+        <button onclick="updateChart('line')">Line Chart</button>
+      </div>
+      <div class="chartdiv h-[320px] w-[30%]  rounded-[10px]" id="chartdiv">
+        <h2 >
+          You can see your expenses in a form of graph ....
+        </h2> 
+        <canvas id="expenseChart"></canvas>
+      </div>
+    </div>
+
+<!-- div for tax calculator -->
+    <div
+      id="tax-calculator"
+      class="flex flex-col justify-center items-center gap-6 w-[30%] mx-auto mt-8 bg-white p-6 rounded-lg shadow-md border border-gray-200"
+    >
+      <h1 class="text-2xl font-bold text-gray-800">Tax Calculator</h1>
+
+      <form id="tax-form" class="w-full flex flex-col gap-4">
+        <input
+          type="number"
+          id="income-input"
+          placeholder="Enter Income to calculate tax"
+          class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"
+        />
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 transition duration-200 cursor-pointer"
+        >
+          Calculate
+        </button>
+      </form>
+
+      <p class="text-gray-700">
+        Total Income: ₹ <span id="pre_income">0</span>
+      </p>
+      <p class="text-gray-700">Tax Rate: <span id="tax_rate">0%</span></p>
+
+      <!-- Tax Rate Guide -->
+      <div
+        id="tax-guide"
+        class="w-full bg-gray-100 rounded-lg p-4 border border-gray-200"
+      >
+        <h2 class="text-lg font-semibold mb-4 text-gray-800">Tax Rate Guide</h2>
+        <div class="space-y-2">
+          <div class="flex justify-between text-gray-600">
+            <p>Income above ₹10,00,000</p>
+            <p class="font-medium">20%</p>
+          </div>
+          <div class="flex justify-between text-gray-600">
+            <p>Income above ₹7,00,000</p>
+            <p class="font-medium">15%</p>
+          </div>
+          <div class="flex justify-between text-gray-600">
+            <p>Income above ₹5,00,000</p>
+            <p class="font-medium">10%</p>
+          </div>
+          <div class="flex justify-between text-gray-600">
+            <p>Income above ₹3,00,000</p>
+            <p class="font-medium">5%</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-gray-700">Tax to Pay: ₹ <span id="total-tax">0</span></p>
+      <p class="text-gray-700">
+        Amount Left After Tax: ₹ <span id="post-tax-income">0</span>
+      </p>
+          
+    </div>
+
+
+    <div class="Artificial" id="Artificial">
+      <h1 class=" text-black" style="margin: 10px;">Get Suggestions</h1>
+      <p class="suggestion"></p>
+      <p class="suggestion"></p>
+      <button id="suggestion-button">Get Suggestion</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<!-- content which showing budget Summary -->
+<!-- <div class="budget mt-5">
+        <h2 class="text-2xl bold">Budget Summary</h2>
+           <p>Total Income: ₹</p>
+            <p>Total Expenses: ₹</p>
+            <p>Balance: ₹</p>
+            <button class="border text-sm px-2 py-0.5 rounded-sm bg-gray-600 text-white hover:bg-white hover:text-gray-800 transition-all duration-75;">Clear All</button>
+       </div> -->
